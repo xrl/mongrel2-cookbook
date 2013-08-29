@@ -1,0 +1,32 @@
+{
+  "name": "mongrel2",
+  "description": "Installs/Configures mongrel2",
+  "long_description": "REQUIREMENTS\n============\n\nPlatform\n--------\n\nCurrently tested on Ubuntu 10.10. If you get it working on another platform (or\nit doesn't work on your platform of choice), open an issue.\n\nCookbooks\n---------\n\n- build-essential\n- zeromq\n- daemontools\n\nATTRIBUTES\n==========\n\nAll attributes are named under the `mongrel2` keyspace. The attributes\nspecified in the cookbook are used to setup the default config file.\n\n* `node[:mongrel2][:src_version]` - default version to download\n* `node[:mongrel2][:src_mirror]` - full download URL\n* `node[:mongrel2][:checksum]` - checksum of src_mirror\n* `node[:mongrel2][:chroot]` - directory to chroot mongrel2 in\n* `node[:mongrel2][:uuid]` - UUID of the mongrel2 server\n* `node[:mongrel2][:name]` - name of the mongrel2 server\n* `node[:mongrel2][:hostname]` - hostname to use by default\n* `node[:mongrel2][:port]` - port to listen on\n\nRECIPES\n=======\n\ndefault\n-------\n\nInstalls mongrel2, creates all the required directories, compiles the\nconfiguration and starts the service\n\nLICENSE AND AUTHOR\n==================\n\nAuthor:: Thomas Rampelberg (<thomas@saunter.org>)\nAuthor:: Xavier Lange (<xrlange@gmail.com>)\n\nCopyright 2011, Thomas Rampelberg\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n\n\n",
+  "maintainer": "Thomas Rampelberg",
+  "maintainer_email": "thomas@saunter.org",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+    "git": ">= 0.0.0",
+    "build-essential": ">= 0.0.0",
+    "zeromq": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "1.5.0"
+}

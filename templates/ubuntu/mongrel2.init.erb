@@ -1,0 +1,70 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          nginx
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the mongrel2 web server
+# Description:       starts mongrel2 using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=<%= @m2sh %>
+DAEMON_OPTS="<%= @db %> <%= @uuid %>"
+NAME=mongrel2
+DESC="mongrel2 webserver"
+PID=<%= @pid %>
+
+# Include nginx defaults if available
+if [ -f /etc/default/nginx ]; then
+  . /etc/default/nginx
+fi
+
+test -x $DAEMON || exit 0
+test -x $PRIVBIND || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+    echo -n "Starting $DESC: "
+    start-stop-daemon --quiet --exec $DAEMON --pidfile $PID --start -- $DAEMON_OPTS || true
+    echo "$NAME."
+    ;;
+
+  stop)
+    echo -n "Stopping $DESC: "
+    start-stop-daemon --stop --quiet --pidfile $PID \
+        --exec $DAEMON || true
+    echo "$NAME."
+    ;;
+
+  restart|force-reload)
+    echo -n "Restarting $DESC: "
+    start-stop-daemon --stop --quiet --pidfile $PID --exec $DAEMON || true
+    sleep 1
+    start-stop-daemon --quiet --exec $DAEMON --pidfile $PID --start -- $DAEMON_OPTS || true
+    echo "$NAME."
+    ;;
+
+  reload)
+    echo -n "Reloading $DESC configuration: "
+    start-stop-daemon --stop --signal HUP --quiet --pidfile $PID \
+        --exec $DAEMON || true
+    echo "$NAME."
+    ;;
+
+  status)
+    status_of_proc -p $PID "$DAEMON" mongrel2 && exit 0 || exit $?
+    ;;
+  *)
+    echo "Usage: $NAME {start|stop|restart|reload|force-reload|status|configtest}" >&2
+    exit 1
+    ;;
+esac
+
+exit 0
