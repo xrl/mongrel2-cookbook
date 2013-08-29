@@ -1,3 +1,8 @@
+MONGREL2
+========
+
+A weird little web server that you might want to play around with. This is my first attempt at creating a LWRP.
+
 REQUIREMENTS
 ============
 
